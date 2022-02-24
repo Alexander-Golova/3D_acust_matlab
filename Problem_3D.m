@@ -1,5 +1,5 @@
 % Основные параметры задачи
-N = 20;
+N = 10;
 h = 1 / N;
 
 % параметры регуляризованного метода
@@ -122,4 +122,99 @@ hF = figure;
 figure(hF);
 mesh(X_pl_2D, Y_pl_2D, exactXi(:, :, 3));
   
+% задаём матрицы a
+% счет индексов метода квадратур
+ind = zeros(1, N);
+for k = 1:N
+   ind(k) = 1.0;
+end
+ind(1) = 0.5;
+ind(N) = 0.5;
+    
+a_10 = zeros(N^3); 
+a_20 = zeros(N^3); 
+a_30 = zeros(N^3); 
+for k = 1:N
+    for l = 1:N
+        for m = 1:N
+            coord_1 = N^2 * (k - 1) + N * (l - 1) + (m - 1);
+            for p = 1:N
+                for q = 1:N
+                    for r = 1:N
+                        coord_2 = N^2 * (p - 1) + N * (q - 1) + (r - 1);
+                        a_10(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([h * (k - 1) h * (l - 1) h * (m - 1)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(1), c_0);
+                        a_20(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([h * (k - 1) h * (l - 1) h * (m - 1)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(2), c_0);
+                        a_30(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([h * (k - 1) h * (l - 1) h * (m - 1)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(3), c_0);
+                    end
+                end
+            end
+        end
+    end
+end
+
+% вычисляем матрицу over_a для каждого источника
+a_11 = zeros(N^3);
+a_12 = zeros(N^3);
+a_13 = zeros(N^3);
+a_14 = zeros(N^3);
+a_15 = zeros(N^3);
+a_16 = zeros(N^3);
+a_21 = zeros(N^3);
+a_22 = zeros(N^3);
+a_23 = zeros(N^3);
+a_24 = zeros(N^3);
+a_25 = zeros(N^3);
+a_26 = zeros(N^3);
+a_31 = zeros(N^3);
+a_32 = zeros(N^3);
+a_33 = zeros(N^3);
+a_34 = zeros(N^3);
+a_35 = zeros(N^3);
+a_36 = zeros(N^3);
+
+ for k = 1:N
+     for l = 1:N
+         angle_S_phi_1 = Detect_Angle_phi(1, 1) + h_ang_phi * (l - 1);
+         angle_S_phi_2 = Detect_Angle_phi(2, 1) + h_ang_phi * (l - 1);
+         angle_S_phi_3 = Detect_Angle_phi(3, 1) + h_ang_phi * (l - 1);
+         angle_S_phi_4 = Detect_Angle_phi(4, 1) + h_ang_phi * (l - 1);
+         angle_S_phi_5 = Detect_Angle_phi(5, 1) + h_ang_phi * (l - 1);
+         angle_S_phi_6 = Detect_Angle_phi(6, 1) + h_ang_phi * (l - 1);
+         for m = 1:N
+             coord_1 = N^2 * (k - 1) + N * (l - 1) + (m - 1);
+             angle_S_thetha_1 = Detect_Angle_thetha(1, 1)  + h_ang_thetha * (m - 1);
+             angle_S_thetha_2 = Detect_Angle_thetha(2, 1)  + h_ang_thetha * (m - 1);
+             angle_S_thetha_3 = Detect_Angle_thetha(3, 1)  + h_ang_thetha * (m - 1);
+             angle_S_thetha_4 = Detect_Angle_thetha(4, 1)  + h_ang_thetha * (m - 1);
+             angle_S_thetha_5 = Detect_Angle_thetha(5, 1)  + h_ang_thetha * (m - 1);
+             angle_S_thetha_6 = Detect_Angle_thetha(6, 1)  + h_ang_thetha * (m - 1);
+             for p = 1:N
+                 for q = 1:N
+                     for r = 1:N  
+                         coord_2 = N^2 * (p - 1) + N * (q - 1) + (r - 1);
+                         a_11(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_1) * cos(angle_S_phi_1) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_1) * sin(angle_S_phi_1) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_1)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(1), c_0);
+                         a_21(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_1) * cos(angle_S_phi_1) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_1) * sin(angle_S_phi_1) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_1)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(2), c_0);
+                         a_31(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_1) * cos(angle_S_phi_1) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_1) * sin(angle_S_phi_1) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_1)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(3), c_0);
+                         a_12(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_2) * cos(angle_S_phi_2) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_2) * sin(angle_S_phi_2) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_2)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(1), c_0);
+                         a_22(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_2) * cos(angle_S_phi_2) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_2) * sin(angle_S_phi_2) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_2)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(2), c_0);
+                         a_32(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_2) * cos(angle_S_phi_2) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_2) * sin(angle_S_phi_2) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_2)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(3), c_0);
+                         a_13(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_3) * cos(angle_S_phi_3) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_3) * sin(angle_S_phi_3) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_3)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(1), c_0);
+                         a_23(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_3) * cos(angle_S_phi_3) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_3) * sin(angle_S_phi_3) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_3)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(2), c_0);
+                         a_33(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_3) * cos(angle_S_phi_3) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_3) * sin(angle_S_phi_3) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_3)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(3), c_0);
+                         a_14(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_4) * cos(angle_S_phi_4) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_4) * sin(angle_S_phi_4) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_4)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(1), c_0);
+                         a_24(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_4) * cos(angle_S_phi_4) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_4) * sin(angle_S_phi_4) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_4)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(2), c_0);
+                         a_34(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_4) * cos(angle_S_phi_4) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_4) * sin(angle_S_phi_4) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_4)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(3), c_0);
+                         a_15(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_5) * cos(angle_S_phi_5) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_5) * sin(angle_S_phi_5) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_5)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(1), c_0);
+                         a_25(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_5) * cos(angle_S_phi_5) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_5) * sin(angle_S_phi_5) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_5)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(2), c_0);
+                         a_35(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_5) * cos(angle_S_phi_5) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_5) * sin(angle_S_phi_5) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_5)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(3), c_0);
+                         a_16(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_6) * cos(angle_S_phi_6) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_6) * sin(angle_S_phi_6) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_6)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(1), c_0);
+                         a_26(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_6) * cos(angle_S_phi_6) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_6) * sin(angle_S_phi_6) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_6)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(2), c_0);
+                         a_36(coord_1, coord_2) = h^3 * ind(p) * ind(q) * ind(r) * G([0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_7) * cos(angle_S_phi_6) 0.5 + (R_sourse + h_D * (k - 1)) * sin(angle_S_thetha_6) * sin(angle_S_phi_6) 0.5 + (R_sourse + h_D * (k - 1)) * cos(angle_S_thetha_6)], [h * (p - 1) h * (q - 1) h * (r - 1)], omega(3), c_0);
+                     end
+                 end
+             end
+         end
+     end
+ end
+
 
