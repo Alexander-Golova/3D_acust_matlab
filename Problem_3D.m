@@ -217,4 +217,73 @@ a_36 = zeros(N^3);
      end
  end
 
+% для правой части основной системы
+f_1_R_1 = zeros(N^3, 1);
+f_1_S_1 = zeros(N^3, 1);
+f_1_R_2 = zeros(N^3, 1);
+f_1_S_2 = zeros(N^3, 1);
+f_1_R_3 = zeros(N^3, 1);
+f_1_S_3 = zeros(N^3, 1);
+f_1_R_4 = zeros(N^3, 1);
+f_1_S_4 = zeros(N^3, 1);
+f_1_R_5 = zeros(N^3, 1);
+f_1_S_5 = zeros(N^3, 1);
+f_1_R_6 = zeros(N^3, 1);
+f_1_S_6 = zeros(N^3, 1);
+
+f_2_R_1 = zeros(N^3, 1);
+f_2_S_1 = zeros(N^3, 1);
+f_2_R_2 = zeros(N^3, 1);
+f_2_S_2 = zeros(N^3, 1);
+f_2_R_3 = zeros(N^3, 1);
+f_2_S_3 = zeros(N^3, 1);
+f_2_R_4 = zeros(N^3, 1);
+f_2_S_4 = zeros(N^3, 1);
+f_2_R_5 = zeros(N^3, 1);
+f_2_S_5 = zeros(N^3, 1);
+f_2_R_6 = zeros(N^3, 1);
+f_2_S_6 = zeros(N^3, 1);
+
+f_3_R_1 = zeros(N^3, 1);
+f_3_S_1 = zeros(N^3, 1);
+f_3_R_2 = zeros(N^3, 1);
+f_3_S_2 = zeros(N^3, 1);
+f_3_R_3 = zeros(N^3, 1);
+f_3_S_3 = zeros(N^3, 1);
+f_3_R_4 = zeros(N^3, 1);
+f_3_S_4 = zeros(N^3, 1);
+f_3_R_5 = zeros(N^3, 1);
+f_3_S_5 = zeros(N^3, 1);
+f_3_R_6 = zeros(N^3, 1);
+f_3_S_6 = zeros(N^3, 1);
+
+for k = 1:N
+    for l = 1:N
+        for m = 1:N
+            coord_1 = N^2 * (k -1) + N * (l - 1) + m;
+            f_1_R_1(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(1, :), omega(1), c_0);
+            f_1_R_2(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(2, :), omega(1), c_0);
+            f_1_R_3(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(3, :), omega(1), c_0);
+            f_1_R_4(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(4, :), omega(1), c_0);
+            f_1_R_5(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(5, :), omega(1), c_0);
+            f_1_R_6(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(6, :), omega(1), c_0);
+            
+            f_2_R_1(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(1, :), omega(2), c_0);
+            f_2_R_2(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(2, :), omega(2), c_0);
+            f_2_R_3(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(3, :), omega(2), c_0);
+            f_2_R_4(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(4, :), omega(2), c_0);
+            f_2_R_5(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(5, :), omega(2), c_0);
+            f_2_R_6(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(6, :), omega(2), c_0);
+            
+            f_3_R_1(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(1, :), omega(3), c_0);
+            f_3_R_2(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(2, :), omega(3), c_0);
+            f_3_R_3(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(3, :), omega(3), c_0);
+            f_3_R_4(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(4, :), omega(3), c_0);
+            f_3_R_5(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(5, :), omega(3), c_0);
+            f_3_R_6(coord_1) = G([h * (k - 1) h * (l - 1) h * (m - 1)], Source(6, :), omega(3), c_0);
+            
+            
+        end
+    end
+end
 
