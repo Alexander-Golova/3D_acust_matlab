@@ -102,6 +102,8 @@ plot3(X_pl, Y_pl, Z_pl, '.k', Source(number_Sourse, 1), Source(number_Sourse, 2)
 %
 %---------------------------------------------------------------
 
+tic;
+
 % задание точного xi - exactXi
 exactXi = zeros(N, N, N);
 xi = zeros(N^3, 1);
@@ -218,43 +220,25 @@ a_36 = zeros(N^3);
 
 % для правой части основной системы
 f_1_R_1 = zeros(N^3, 1);
-f_1_S_1 = zeros(N^3, 1);
 f_1_R_2 = zeros(N^3, 1);
-f_1_S_2 = zeros(N^3, 1);
 f_1_R_3 = zeros(N^3, 1);
-f_1_S_3 = zeros(N^3, 1);
 f_1_R_4 = zeros(N^3, 1);
-f_1_S_4 = zeros(N^3, 1);
 f_1_R_5 = zeros(N^3, 1);
-f_1_S_5 = zeros(N^3, 1);
 f_1_R_6 = zeros(N^3, 1);
-f_1_S_6 = zeros(N^3, 1);
 
 f_2_R_1 = zeros(N^3, 1);
-f_2_S_1 = zeros(N^3, 1);
 f_2_R_2 = zeros(N^3, 1);
-f_2_S_2 = zeros(N^3, 1);
 f_2_R_3 = zeros(N^3, 1);
-f_2_S_3 = zeros(N^3, 1);
 f_2_R_4 = zeros(N^3, 1);
-f_2_S_4 = zeros(N^3, 1);
 f_2_R_5 = zeros(N^3, 1);
-f_2_S_5 = zeros(N^3, 1);
 f_2_R_6 = zeros(N^3, 1);
-f_2_S_6 = zeros(N^3, 1);
 
 f_3_R_1 = zeros(N^3, 1);
-f_3_S_1 = zeros(N^3, 1);
 f_3_R_2 = zeros(N^3, 1);
-f_3_S_2 = zeros(N^3, 1);
 f_3_R_3 = zeros(N^3, 1);
-f_3_S_3 = zeros(N^3, 1);
 f_3_R_4 = zeros(N^3, 1);
-f_3_S_4 = zeros(N^3, 1);
 f_3_R_5 = zeros(N^3, 1);
-f_3_S_5 = zeros(N^3, 1);
 f_3_R_6 = zeros(N^3, 1);
-f_3_S_6 = zeros(N^3, 1);
 
 for k = 1:N
     for l = 1:N
@@ -285,26 +269,6 @@ for k = 1:N
         end
     end
 end
-
-% Для поля на неоднородности
-u11 = zeros(N^3, 1);
-u12 = zeros(N^3, 1);
-u13 = zeros(N^3, 1);
-u14 = zeros(N^3, 1);
-u15 = zeros(N^3, 1);
-u16 = zeros(N^3, 1);
-u21 = zeros(N^3, 1);
-u22 = zeros(N^3, 1);
-u23 = zeros(N^3, 1);
-u24 = zeros(N^3, 1);
-u25 = zeros(N^3, 1);
-u26 = zeros(N^3, 1);
-u31 = zeros(N^3, 1);
-u32 = zeros(N^3, 1);
-u33 = zeros(N^3, 1);
-u34 = zeros(N^3, 1);
-u35 = zeros(N^3, 1);
-u36 = zeros(N^3, 1);
 
 % Вспомогательная матрица для первой частоты
 Matr = zeros(N^3);
@@ -366,3 +330,7 @@ u35 = Matr \ f_3_R_5;
 f_3_S_5 = a_35 * (xi .* u35);
 u36 = Matr \ f_3_R_6;
 f_3_S_6 = a_36 * (xi .* u36);
+
+%---------------------------------------
+toc;
+%---------------------------------------
