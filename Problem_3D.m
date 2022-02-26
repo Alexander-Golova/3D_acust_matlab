@@ -105,7 +105,6 @@ plot3(X_pl, Y_pl, Z_pl, '.k', Source(number_Sourse, 1), Source(number_Sourse, 2)
 % задание точного xi - exactXi
 exactXi = zeros(N, N, N);
 xi = zeros(N^3, 1);
-xi_pribl = zeros(N^3, 1);
 
 for k = 1:N
     for l = 1:N
@@ -287,3 +286,83 @@ for k = 1:N
     end
 end
 
+% ƒл€ пол€ на неоднородности
+u11 = zeros(N^3, 1);
+u12 = zeros(N^3, 1);
+u13 = zeros(N^3, 1);
+u14 = zeros(N^3, 1);
+u15 = zeros(N^3, 1);
+u16 = zeros(N^3, 1);
+u21 = zeros(N^3, 1);
+u22 = zeros(N^3, 1);
+u23 = zeros(N^3, 1);
+u24 = zeros(N^3, 1);
+u25 = zeros(N^3, 1);
+u26 = zeros(N^3, 1);
+u31 = zeros(N^3, 1);
+u32 = zeros(N^3, 1);
+u33 = zeros(N^3, 1);
+u34 = zeros(N^3, 1);
+u35 = zeros(N^3, 1);
+u36 = zeros(N^3, 1);
+
+% ¬спомогательна€ матрица дл€ первой частоты
+Matr = zeros(N^3);
+for ii = 1:N^3
+    for jj = 1:N^3
+        Matr(ii, jj) = -a_10(ii, jj) * xi(jj);
+    end
+    Matr(ii, ii) = Matr(ii, ii) + 1;
+end
+u11 = Matr \ f_1_R_1;
+f_1_S_1 = a_11 * (xi .* u11);
+u12 = Matr \ f_1_R_2;
+f_1_S_2 = a_12 * (xi .* u12);
+u13 = Matr \ f_1_R_3;
+f_1_S_3 = a_13 * (xi .* u13);
+u14 = Matr \ f_1_R_4;
+f_1_S_4 = a_14 * (xi .* u14);
+u15 = Matr \ f_1_R_5;
+f_1_S_5 = a_15 * (xi .* u15);
+u16 = Matr \ f_1_R_6;
+f_1_S_6 = a_16 * (xi .* u16);
+
+% ¬спомогательна€ матрица дл€ второй частоты
+for ii = 1:N^3
+    for jj = 1:N^3
+        Matr(ii, jj) = -a_20(ii, jj) * xi(jj);
+    end
+    Matr(ii, ii) = Matr(ii, ii) + 1;
+end
+u21 = Matr \ f_2_R_1;
+f_2_S_1 = a_21 * (xi .* u21);
+u22 = Matr \ f_2_R_2;
+f_2_S_2 = a_22 * (xi .* u22);
+u23 = Matr \ f_2_R_3;
+f_2_S_3 = a_23 * (xi .* u23);
+u24 = Matr \ f_2_R_4;
+f_2_S_4 = a_24 * (xi .* u24);
+u25 = Matr \ f_2_R_5;
+f_2_S_5 = a_25 * (xi .* u25);
+u26 = Matr \ f_2_R_6;
+f_2_S_6 = a_26 * (xi .* u26);
+
+% ¬спомогательна€ матрица дл€ третьей частоты
+for ii = 1:N^3
+    for jj = 1:N^3
+        Matr(ii, jj) = -a_30(ii, jj) * xi(jj);
+    end
+    Matr(ii, ii) = Matr(ii, ii) + 1;
+end
+u31 = Matr \ f_3_R_1;
+f_3_S_1 = a_31 * (xi .* u31);
+u32 = Matr \ f_3_R_2;
+f_3_S_2 = a_32 * (xi .* u32);
+u33 = Matr \ f_3_R_3;
+f_3_S_3 = a_33 * (xi .* u33);
+u34 = Matr \ f_3_R_4;
+f_3_S_4 = a_34 * (xi .* u34);
+u35 = Matr \ f_3_R_5;
+f_3_S_5 = a_35 * (xi .* u35);
+u36 = Matr \ f_3_R_6;
+f_3_S_6 = a_36 * (xi .* u36);
