@@ -653,7 +653,29 @@ for iter = 1:numberOfIterations
     end
     
     % Находим неизвестные
-    xi = xi - gamma * (J_11 * F11_1 + )
+    xi_Delta = J_11 * F11_1 + J_11_2 * F11_2;
+    xi_Delta = xi_Delta + J_12 * F12_1 + J_12_2 * F12_2;
+    xi_Delta = xi_Delta + J_13 * F13_1 + J_13_2 * F13_2;
+    xi_Delta = xi_Delta + J_14 * F14_1 + J_14_2 * F14_2;
+    xi_Delta = xi_Delta + J_15 * F15_1 + J_15_2 * F15_2;
+    xi_Delta = xi_Delta + J_16 * F16_1 + J_16_2 * F16_2;
+    
+    xi_Delta = xi_Delta + J_21 * F21_1 + J_21_2 * F21_2;
+    xi_Delta = xi_Delta + J_22 * F22_1 + J_22_2 * F22_2;
+    xi_Delta = xi_Delta + J_23 * F23_1 + J_23_2 * F23_2;
+    xi_Delta = xi_Delta + J_24 * F24_1 + J_24_2 * F24_2;
+    xi_Delta = xi_Delta + J_25 * F25_1 + J_25_2 * F25_2;
+    xi_Delta = xi_Delta + J_26 * F26_1 + J_26_2 * F26_2;
+ 
+    xi_Delta = xi_Delta + J_31 * F31_1 + J_31_2 * F31_2;
+    xi_Delta = xi_Delta + J_32 * F32_1 + J_32_2 * F32_2;
+    xi_Delta = xi_Delta + J_33 * F33_1 + J_33_2 * F33_2;
+    xi_Delta = xi_Delta + J_34 * F34_1 + J_34_2 * F34_2;
+    xi_Delta = xi_Delta + J_35 * F35_1 + J_35_2 * F35_2;
+    xi_Delta = xi_Delta + J_36 * F36_1 + J_36_2 * F36_2;
+    
+    xi = xi - gamma * xi_Delta;
+ 
  
 
 end
