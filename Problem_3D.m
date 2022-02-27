@@ -4,7 +4,7 @@ h = 1 / N;
 
 % параметры регуляризованного метода
 numberOfIterations = 1;
-alpha = 0.75;
+gamma = 0.75;
 multiplier = 0.25;
 
 % задание характеристик поля
@@ -401,6 +401,13 @@ J_14 = zeros(N^3);
 J_15 = zeros(N^3);
 J_16 = zeros(N^3);
 
+J_11_2 = zeros(N^3);
+J_12_2 = zeros(N^3);
+J_13_2 = zeros(N^3);
+J_14_2 = zeros(N^3);
+J_15_2 = zeros(N^3);
+J_16_2 = zeros(N^3);
+
 J_21 = zeros(N^3);
 J_22 = zeros(N^3);
 J_23 = zeros(N^3);
@@ -408,12 +415,27 @@ J_24 = zeros(N^3);
 J_25 = zeros(N^3);
 J_26 = zeros(N^3);
 
+J_21_2 = zeros(N^3);
+J_22_2 = zeros(N^3);
+J_23_2 = zeros(N^3);
+J_24_2 = zeros(N^3);
+J_25_2 = zeros(N^3);
+J_26_2 = zeros(N^3);
+
 J_31 = zeros(N^3);
 J_32 = zeros(N^3);
 J_33 = zeros(N^3);
 J_34 = zeros(N^3);
 J_35 = zeros(N^3);
 J_36 = zeros(N^3);
+
+J_31_2 = zeros(N^3);
+J_32_2 = zeros(N^3);
+J_33_2 = zeros(N^3);
+J_34_2 = zeros(N^3);
+J_35_2 = zeros(N^3);
+J_36_2 = zeros(N^3);
+
 
 %------------------
 % Итерационный метод
@@ -454,26 +476,47 @@ for iter = 1:numberOfIterations
     end
     for ii = 1:N^3
         for jj = 1:N^3
-            J_11(ii, jj) = a_11(ii, jj) * u11(jj);
-            J_12(ii, jj) = a_12(ii, jj) * u12(jj);
-            J_13(ii, jj) = a_13(ii, jj) * u13(jj);
-            J_14(ii, jj) = a_14(ii, jj) * u14(jj);
-            J_15(ii, jj) = a_15(ii, jj) * u15(jj);
-            J_16(ii, jj) = a_16(ii, jj) * u16(jj);
+            J_11(ii, jj) = a_10(ii, jj) * u11(jj);
+            J_12(ii, jj) = a_10(ii, jj) * u12(jj);
+            J_13(ii, jj) = a_10(ii, jj) * u13(jj);
+            J_14(ii, jj) = a_10(ii, jj) * u14(jj);
+            J_15(ii, jj) = a_10(ii, jj) * u15(jj);
+            J_16(ii, jj) = a_10(ii, jj) * u16(jj);
             
-            J_21(ii, jj) = a_21(ii, jj) * u21(jj);
-            J_22(ii, jj) = a_22(ii, jj) * u22(jj);
-            J_23(ii, jj) = a_23(ii, jj) * u23(jj);
-            J_24(ii, jj) = a_24(ii, jj) * u24(jj);
-            J_25(ii, jj) = a_25(ii, jj) * u25(jj);
-            J_26(ii, jj) = a_26(ii, jj) * u26(jj);
+            J_11_2(ii, jj) = a_11(ii, jj) * u11(jj);
+            J_12_2(ii, jj) = a_12(ii, jj) * u12(jj);
+            J_13_2(ii, jj) = a_13(ii, jj) * u13(jj);
+            J_14_2(ii, jj) = a_14(ii, jj) * u14(jj);
+            J_15_2(ii, jj) = a_15(ii, jj) * u15(jj);
+            J_16_2(ii, jj) = a_16(ii, jj) * u16(jj);
             
-            J_31(ii, jj) = a_31(ii, jj) * u31(jj);
-            J_32(ii, jj) = a_32(ii, jj) * u32(jj);
-            J_33(ii, jj) = a_33(ii, jj) * u33(jj);
-            J_34(ii, jj) = a_34(ii, jj) * u34(jj);
-            J_35(ii, jj) = a_35(ii, jj) * u35(jj);
-            J_36(ii, jj) = a_36(ii, jj) * u36(jj);
+            J_21(ii, jj) = a_20(ii, jj) * u21(jj);
+            J_22(ii, jj) = a_20(ii, jj) * u22(jj);
+            J_23(ii, jj) = a_20(ii, jj) * u23(jj);
+            J_24(ii, jj) = a_20(ii, jj) * u24(jj);
+            J_25(ii, jj) = a_20(ii, jj) * u25(jj);
+            J_26(ii, jj) = a_20(ii, jj) * u26(jj);
+            
+            J_21_2(ii, jj) = a_21(ii, jj) * u21(jj);
+            J_22_2(ii, jj) = a_22(ii, jj) * u22(jj);
+            J_23_2(ii, jj) = a_23(ii, jj) * u23(jj);
+            J_24_2(ii, jj) = a_24(ii, jj) * u24(jj);
+            J_25_2(ii, jj) = a_25(ii, jj) * u25(jj);
+            J_26_2(ii, jj) = a_26(ii, jj) * u26(jj);
+            
+            J_31(ii, jj) = a_30(ii, jj) * u31(jj);
+            J_32(ii, jj) = a_30(ii, jj) * u32(jj);
+            J_33(ii, jj) = a_30(ii, jj) * u33(jj);
+            J_34(ii, jj) = a_30(ii, jj) * u34(jj);
+            J_35(ii, jj) = a_30(ii, jj) * u35(jj);
+            J_36(ii, jj) = a_30(ii, jj) * u36(jj);
+            
+            J_31_2(ii, jj) = a_31(ii, jj) * u31(jj);
+            J_32_2(ii, jj) = a_32(ii, jj) * u32(jj);
+            J_33_2(ii, jj) = a_33(ii, jj) * u33(jj);
+            J_34_2(ii, jj) = a_34(ii, jj) * u34(jj);
+            J_35_2(ii, jj) = a_35(ii, jj) * u35(jj);
+            J_36_2(ii, jj) = a_36(ii, jj) * u36(jj);
         end
     end
     % находим F
@@ -543,71 +586,74 @@ for iter = 1:numberOfIterations
     F35_1 = F35_1 - f_3_R_5;
     F36_1 = F36_1 - f_3_R_6;
     
-    F_11_2 = zeros(N^3);
-    F_12_2 = zeros(N^3);
-    F_13_2 = zeros(N^3);
-    F_14_2 = zeros(N^3);
-    F_15_2 = zeros(N^3);
-    F_16_2 = zeros(N^3);
+    F11_2 = zeros(N^3);
+    F12_2 = zeros(N^3);
+    F13_2 = zeros(N^3);
+    F14_2 = zeros(N^3);
+    F15_2 = zeros(N^3);
+    F16_2 = zeros(N^3);
     
-    F_21_2 = zeros(N^3);
-    F_22_2 = zeros(N^3);
-    F_23_2 = zeros(N^3);
-    F_24_2 = zeros(N^3);
-    F_25_2 = zeros(N^3);
-    F_26_2 = zeros(N^3);
+    F21_2 = zeros(N^3);
+    F22_2 = zeros(N^3);
+    F23_2 = zeros(N^3);
+    F24_2 = zeros(N^3);
+    F25_2 = zeros(N^3);
+    F26_2 = zeros(N^3);
     
-    F_31_2 = zeros(N^3);
-    F_32_2 = zeros(N^3);
-    F_33_2 = zeros(N^3);
-    F_34_2 = zeros(N^3);
-    F_35_2 = zeros(N^3);
-    F_36_2 = zeros(N^3);
+    F31_2 = zeros(N^3);
+    F32_2 = zeros(N^3);
+    F33_2 = zeros(N^3);
+    F34_2 = zeros(N^3);
+    F35_2 = zeros(N^3);
+    F36_2 = zeros(N^3);
     
     for ii = 1:N^3
         for jj = 1:N^3
-            F_11_2(ii) = F_11_2(ii) + a_11(ii, jj) * (xi(jj) .* u11(jj));
-            F_12_2(ii) = F_12_2(ii) + a_12(ii, jj) * (xi(jj) .* u12(jj));
-            F_13_2(ii) = F_13_2(ii) + a_13(ii, jj) * (xi(jj) .* u13(jj));
-            F_14_2(ii) = F_14_2(ii) + a_14(ii, jj) * (xi(jj) .* u14(jj));
-            F_15_2(ii) = F_15_2(ii) + a_15(ii, jj) * (xi(jj) .* u15(jj));
-            F_16_2(ii) = F_16_2(ii) + a_16(ii, jj) * (xi(jj) .* u16(jj));
+            F11_2(ii) = F11_2(ii) + a_11(ii, jj) * (xi(jj) .* u11(jj));
+            F12_2(ii) = F12_2(ii) + a_12(ii, jj) * (xi(jj) .* u12(jj));
+            F13_2(ii) = F13_2(ii) + a_13(ii, jj) * (xi(jj) .* u13(jj));
+            F14_2(ii) = F14_2(ii) + a_14(ii, jj) * (xi(jj) .* u14(jj));
+            F15_2(ii) = F15_2(ii) + a_15(ii, jj) * (xi(jj) .* u15(jj));
+            F16_2(ii) = F16_2(ii) + a_16(ii, jj) * (xi(jj) .* u16(jj));
             
-            F_21_2(ii) = F_21_2(ii) + a_11(ii, jj) * (xi(jj) .* u11(jj));
-            F_22_2(ii) = F_22_2(ii) + a_22(ii, jj) * (xi(jj) .* u22(jj));
-            F_23_2(ii) = F_23_2(ii) + a_23(ii, jj) * (xi(jj) .* u23(jj));
-            F_24_2(ii) = F_24_2(ii) + a_24(ii, jj) * (xi(jj) .* u24(jj));
-            F_25_2(ii) = F_25_2(ii) + a_25(ii, jj) * (xi(jj) .* u25(jj));
-            F_26_2(ii) = F_26_2(ii) + a_26(ii, jj) * (xi(jj) .* u26(jj));
+            F21_2(ii) = F21_2(ii) + a_11(ii, jj) * (xi(jj) .* u11(jj));
+            F22_2(ii) = F22_2(ii) + a_22(ii, jj) * (xi(jj) .* u22(jj));
+            F23_2(ii) = F23_2(ii) + a_23(ii, jj) * (xi(jj) .* u23(jj));
+            F24_2(ii) = F24_2(ii) + a_24(ii, jj) * (xi(jj) .* u24(jj));
+            F25_2(ii) = F25_2(ii) + a_25(ii, jj) * (xi(jj) .* u25(jj));
+            F26_2(ii) = F26_2(ii) + a_26(ii, jj) * (xi(jj) .* u26(jj));
             
-            F_31_2(ii) = F_31_2(ii) + a_31(ii, jj) * (xi(jj) .* u31(jj));
-            F_32_2(ii) = F_32_2(ii) + a_32(ii, jj) * (xi(jj) .* u32(jj));
-            F_33_2(ii) = F_33_2(ii) + a_33(ii, jj) * (xi(jj) .* u33(jj));
-            F_34_2(ii) = F_34_2(ii) + a_34(ii, jj) * (xi(jj) .* u34(jj));
-            F_35_2(ii) = F_35_2(ii) + a_35(ii, jj) * (xi(jj) .* u35(jj));
-            F_36_2(ii) = F_36_2(ii) + a_36(ii, jj) * (xi(jj) .* u36(jj));
+            F31_2(ii) = F31_2(ii) + a_31(ii, jj) * (xi(jj) .* u31(jj));
+            F32_2(ii) = F32_2(ii) + a_32(ii, jj) * (xi(jj) .* u32(jj));
+            F33_2(ii) = F33_2(ii) + a_33(ii, jj) * (xi(jj) .* u33(jj));
+            F34_2(ii) = F34_2(ii) + a_34(ii, jj) * (xi(jj) .* u34(jj));
+            F35_2(ii) = F35_2(ii) + a_35(ii, jj) * (xi(jj) .* u35(jj));
+            F36_2(ii) = F36_2(ii) + a_36(ii, jj) * (xi(jj) .* u36(jj));
         end
-        F_11_2(ii) = F_11_2(ii) - f_1_S_1(ii);
-        F_12_2(ii) = F_12_2(ii) - f_1_S_2(ii);
-        F_13_2(ii) = F_13_2(ii) - f_1_S_3(ii);
-        F_14_2(ii) = F_14_2(ii) - f_1_S_4(ii);
-        F_15_2(ii) = F_15_2(ii) - f_1_S_5(ii);
-        F_16_2(ii) = F_16_2(ii) - f_1_S_6(ii);
+        F11_2(ii) = F11_2(ii) - f_1_S_1(ii);
+        F12_2(ii) = F12_2(ii) - f_1_S_2(ii);
+        F13_2(ii) = F13_2(ii) - f_1_S_3(ii);
+        F14_2(ii) = F14_2(ii) - f_1_S_4(ii);
+        F15_2(ii) = F15_2(ii) - f_1_S_5(ii);
+        F16_2(ii) = F16_2(ii) - f_1_S_6(ii);
         
-        F_21_2(ii) = F_21_2(ii) - f_2_S_1(ii);
-        F_22_2(ii) = F_22_2(ii) - f_2_S_2(ii);
-        F_23_2(ii) = F_23_2(ii) - f_2_S_3(ii);
-        F_24_2(ii) = F_24_2(ii) - f_2_S_4(ii);
-        F_25_2(ii) = F_25_2(ii) - f_2_S_5(ii);
-        F_26_2(ii) = F_26_2(ii) - f_2_S_6(ii);
+        F21_2(ii) = F21_2(ii) - f_2_S_1(ii);
+        F22_2(ii) = F22_2(ii) - f_2_S_2(ii);
+        F23_2(ii) = F23_2(ii) - f_2_S_3(ii);
+        F24_2(ii) = F24_2(ii) - f_2_S_4(ii);
+        F25_2(ii) = F25_2(ii) - f_2_S_5(ii);
+        F26_2(ii) = F26_2(ii) - f_2_S_6(ii);
         
-        F_31_2(ii) = F_31_2(ii) - f_3_S_1(ii);
-        F_32_2(ii) = F_32_2(ii) - f_3_S_2(ii);
-        F_33_2(ii) = F_33_2(ii) - f_3_S_3(ii);
-        F_34_2(ii) = F_34_2(ii) - f_3_S_4(ii);
-        F_35_2(ii) = F_35_2(ii) - f_3_S_5(ii);
-        F_36_2(ii) = F_36_2(ii) - f_3_S_6(ii);
+        F31_2(ii) = F31_2(ii) - f_3_S_1(ii);
+        F32_2(ii) = F32_2(ii) - f_3_S_2(ii);
+        F33_2(ii) = F33_2(ii) - f_3_S_3(ii);
+        F34_2(ii) = F34_2(ii) - f_3_S_4(ii);
+        F35_2(ii) = F35_2(ii) - f_3_S_5(ii);
+        F36_2(ii) = F36_2(ii) - f_3_S_6(ii);
     end
+    
+    % Находим неизвестные
+    xi = xi - gamma * (J_11 * F11_1 + )
  
 
 end
