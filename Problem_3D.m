@@ -690,12 +690,12 @@ for iter = 1:numberOfIterations
     u25 = u25 - gamma * (J_20 * F25_1 + J_205 * F25_2);
     u26 = u26 - gamma * (J_20 * F26_1 + J_206 * F26_2);
     
-    u31 = u31 - gamma * (J_30 * F_31_1 + J_301 * F31_2);
-    u32 = u32 - gamma * (J_30 * F_32_1 + J_302 * F32_2);
-    u33 = u33 - gamma * (J_30 * F_33_1 + J_303 * F33_2);
-    u34 = u34 - gamma * (J_30 * F_34_1 + J_304 * F34_2);
-    u35 = u35 - gamma * (J_30 * F_35_1 + J_305 * F35_2);
-    u36 = u36 - gamma * (J_30 * F_36_1 + J_306 * F36_2);
+    u31 = u31 - gamma * (J_30 * F31_1 + J_301 * F31_2);
+    u32 = u32 - gamma * (J_30 * F32_1 + J_302 * F32_2);
+    u33 = u33 - gamma * (J_30 * F33_1 + J_303 * F33_2);
+    u34 = u34 - gamma * (J_30 * F34_1 + J_304 * F34_2);
+    u35 = u35 - gamma * (J_30 * F35_1 + J_305 * F35_2);
+    u36 = u36 - gamma * (J_30 * F36_1 + J_306 * F36_2);
     
     % проекция xi    
     for ii = 1:N^3
@@ -710,7 +710,7 @@ for iter = 1:numberOfIterations
         for l = 1:N
             for m = 1:N
                 coord_1 = N^2 * (k -1) + N * (l - 1) + m;
-                ApproximateXi(k, l, m) = X(coord_1);                
+                ApproximateXi(k, l, m) = xi(coord_1);                
             end
         end
     end
