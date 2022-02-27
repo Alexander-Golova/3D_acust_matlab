@@ -373,6 +373,27 @@ J_10 = zeros(N^3);
 J_20 = zeros(N^3);
 J_30 = zeros(N^3);
 
+J_101 = zeros(N^3);
+J_102 = zeros(N^3);
+J_103 = zeros(N^3);
+J_104 = zeros(N^3);
+J_105 = zeros(N^3);
+J_106 = zeros(N^3);
+
+J_201 = zeros(N^3);
+J_202 = zeros(N^3);
+J_203 = zeros(N^3);
+J_204 = zeros(N^3);
+J_205 = zeros(N^3);
+J_206 = zeros(N^3);
+
+J_301 = zeros(N^3);
+J_302 = zeros(N^3);
+J_303 = zeros(N^3);
+J_304 = zeros(N^3);
+J_305 = zeros(N^3);
+J_306 = zeros(N^3);
+
 J_11= zeros(N^3);
 J_12= zeros(N^3);
 J_13= zeros(N^3);
@@ -405,6 +426,28 @@ for iter = 1:numberOfIterations
             J_10(ii, jj) = -a_10(ii, jj) * xi(jj);
             J_20(ii, jj) = -a_20(ii, jj) * xi(jj);
             J_30(ii, jj) = -a_30(ii, jj) * xi(jj);
+            
+            J_101(ii, jj) = a_11(ii, jj) * xi(jj);
+            J_102(ii, jj) = a_12(ii, jj) * xi(jj);
+            J_103(ii, jj) = a_13(ii, jj) * xi(jj);
+            J_104(ii, jj) = a_14(ii, jj) * xi(jj);
+            J_105(ii, jj) = a_15(ii, jj) * xi(jj);
+            J_106(ii, jj) = a_16(ii, jj) * xi(jj);
+            
+            J_201(ii, jj) = a_21(ii, jj) * xi(jj);
+            J_202(ii, jj) = a_22(ii, jj) * xi(jj);
+            J_203(ii, jj) = a_23(ii, jj) * xi(jj);
+            J_204(ii, jj) = a_24(ii, jj) * xi(jj);
+            J_205(ii, jj) = a_25(ii, jj) * xi(jj);
+            J_206(ii, jj) = a_26(ii, jj) * xi(jj);
+            
+            J_301(ii, jj) = a_31(ii, jj) * xi(jj);
+            J_302(ii, jj) = a_32(ii, jj) * xi(jj);
+            J_303(ii, jj) = a_33(ii, jj) * xi(jj);
+            J_304(ii, jj) = a_34(ii, jj) * xi(jj);
+            J_305(ii, jj) = a_35(ii, jj) * xi(jj);
+            J_306(ii, jj) = a_36(ii, jj) * xi(jj);
+            
         end
         J_10(ii, ii) = J_10(ii, ii) + 1;
         J_20(ii, ii) = J_20(ii, ii) + 1;
@@ -434,6 +477,7 @@ for iter = 1:numberOfIterations
             J_36(ii, jj) = a_36(ii, jj) * u36(jj);
         end
     end
+    % находим F
     
  
 
