@@ -394,26 +394,26 @@ J_304 = zeros(N^3);
 J_305 = zeros(N^3);
 J_306 = zeros(N^3);
 
-J_11= zeros(N^3);
-J_12= zeros(N^3);
-J_13= zeros(N^3);
-J_14= zeros(N^3);
-J_15= zeros(N^3);
-J_16= zeros(N^3);
+J_11 = zeros(N^3);
+J_12 = zeros(N^3);
+J_13 = zeros(N^3);
+J_14 = zeros(N^3);
+J_15 = zeros(N^3);
+J_16 = zeros(N^3);
 
-J_21= zeros(N^3);
-J_22= zeros(N^3);
-J_23= zeros(N^3);
-J_24= zeros(N^3);
-J_25= zeros(N^3);
-J_26= zeros(N^3);
+J_21 = zeros(N^3);
+J_22 = zeros(N^3);
+J_23 = zeros(N^3);
+J_24 = zeros(N^3);
+J_25 = zeros(N^3);
+J_26 = zeros(N^3);
 
-J_31= zeros(N^3);
-J_32= zeros(N^3);
-J_33= zeros(N^3);
-J_34= zeros(N^3);
-J_35= zeros(N^3);
-J_36= zeros(N^3);
+J_31 = zeros(N^3);
+J_32 = zeros(N^3);
+J_33 = zeros(N^3);
+J_34 = zeros(N^3);
+J_35 = zeros(N^3);
+J_36 = zeros(N^3);
 
 %------------------
 % Итерационный метод
@@ -446,8 +446,7 @@ for iter = 1:numberOfIterations
             J_303(ii, jj) = a_33(ii, jj) * xi(jj);
             J_304(ii, jj) = a_34(ii, jj) * xi(jj);
             J_305(ii, jj) = a_35(ii, jj) * xi(jj);
-            J_306(ii, jj) = a_36(ii, jj) * xi(jj);
-            
+            J_306(ii, jj) = a_36(ii, jj) * xi(jj);            
         end
         J_10(ii, ii) = J_10(ii, ii) + 1;
         J_20(ii, ii) = J_20(ii, ii) + 1;
@@ -478,7 +477,137 @@ for iter = 1:numberOfIterations
         end
     end
     % находим F
+    F11_1 = u11;
+    F12_1 = u12;
+    F13_1 = u13;
+    F14_1 = u14;
+    F15_1 = u15;
+    F16_1 = u16;
     
+    F21_1 = u21;
+    F22_1 = u22;
+    F23_1 = u23;
+    F24_1 = u24;
+    F25_1 = u25;
+    F26_1 = u26;
+    
+    F31_1 = u31;
+    F32_1 = u32;
+    F33_1 = u33;
+    F34_1 = u34;
+    F35_1 = u35;
+    F36_1 = u36;
+    
+    for ii = 1:N^3
+        for jj = 1:N^2
+            F11_1(ii) = F11_1(ii) - a_10(ii, jj) * (xi(jj) .* u11(jj));
+            F12_1(ii) = F12_1(ii) - a_10(ii, jj) * (xi(jj) .* u12(jj));
+            F13_1(ii) = F13_1(ii) - a_10(ii, jj) * (xi(jj) .* u13(jj));
+            F14_1(ii) = F14_1(ii) - a_10(ii, jj) * (xi(jj) .* u14(jj));
+            F15_1(ii) = F15_1(ii) - a_10(ii, jj) * (xi(jj) .* u15(jj));
+            F16_1(ii) = F16_1(ii) - a_10(ii, jj) * (xi(jj) .* u16(jj));
+            
+            F21_1(ii) = F21_1(ii) - a_20(ii, jj) * (xi(jj) .* u21(jj));
+            F22_1(ii) = F22_1(ii) - a_20(ii, jj) * (xi(jj) .* u22(jj));
+            F23_1(ii) = F23_1(ii) - a_20(ii, jj) * (xi(jj) .* u23(jj));
+            F24_1(ii) = F24_1(ii) - a_20(ii, jj) * (xi(jj) .* u24(jj));
+            F25_1(ii) = F25_1(ii) - a_20(ii, jj) * (xi(jj) .* u25(jj));
+            F26_1(ii) = F26_1(ii) - a_20(ii, jj) * (xi(jj) .* u26(jj));
+            
+            F31_1(ii) = F31_1(ii) - a_30(ii, jj) * (xi(jj) .* u31(jj));
+            F32_1(ii) = F32_1(ii) - a_30(ii, jj) * (xi(jj) .* u32(jj));
+            F33_1(ii) = F33_1(ii) - a_30(ii, jj) * (xi(jj) .* u33(jj));
+            F34_1(ii) = F34_1(ii) - a_30(ii, jj) * (xi(jj) .* u34(jj));
+            F35_1(ii) = F35_1(ii) - a_30(ii, jj) * (xi(jj) .* u35(jj));
+            F36_1(ii) = F36_1(ii) - a_30(ii, jj) * (xi(jj) .* u36(jj));
+        end    
+    end
+    F11_1 = F11_1 - f_1_R_1;
+    F12_1 = F12_1 - f_1_R_2;
+    F13_1 = F13_1 - f_1_R_3;
+    F14_1 = F14_1 - f_1_R_4;
+    F15_1 = F15_1 - f_1_R_5;
+    F16_1 = F16_1 - f_1_R_6;
+    
+    F21_1 = F21_1 - f_2_R_1;
+    F22_1 = F22_1 - f_2_R_2;
+    F23_1 = F23_1 - f_2_R_3;
+    F24_1 = F24_1 - f_2_R_4;
+    F25_1 = F25_1 - f_2_R_5;
+    F26_1 = F26_1 - f_2_R_6;
+    
+    F31_1 = F31_1 - f_3_R_1;
+    F32_1 = F32_1 - f_3_R_2;
+    F33_1 = F33_1 - f_3_R_3;
+    F34_1 = F34_1 - f_3_R_4;
+    F35_1 = F35_1 - f_3_R_5;
+    F36_1 = F36_1 - f_3_R_6;
+    
+    F_11_2 = zeros(N^3);
+    F_12_2 = zeros(N^3);
+    F_13_2 = zeros(N^3);
+    F_14_2 = zeros(N^3);
+    F_15_2 = zeros(N^3);
+    F_16_2 = zeros(N^3);
+    
+    F_21_2 = zeros(N^3);
+    F_22_2 = zeros(N^3);
+    F_23_2 = zeros(N^3);
+    F_24_2 = zeros(N^3);
+    F_25_2 = zeros(N^3);
+    F_26_2 = zeros(N^3);
+    
+    F_31_2 = zeros(N^3);
+    F_32_2 = zeros(N^3);
+    F_33_2 = zeros(N^3);
+    F_34_2 = zeros(N^3);
+    F_35_2 = zeros(N^3);
+    F_36_2 = zeros(N^3);
+    
+    for ii = 1:N^3
+        for jj = 1:N^3
+            F_11_2(ii) = F_11_2(ii) + a_11(ii, jj) * (xi(jj) .* u11(jj));
+            F_12_2(ii) = F_12_2(ii) + a_12(ii, jj) * (xi(jj) .* u12(jj));
+            F_13_2(ii) = F_13_2(ii) + a_13(ii, jj) * (xi(jj) .* u13(jj));
+            F_14_2(ii) = F_14_2(ii) + a_14(ii, jj) * (xi(jj) .* u14(jj));
+            F_15_2(ii) = F_15_2(ii) + a_15(ii, jj) * (xi(jj) .* u15(jj));
+            F_16_2(ii) = F_16_2(ii) + a_16(ii, jj) * (xi(jj) .* u16(jj));
+            
+            F_21_2(ii) = F_21_2(ii) + a_11(ii, jj) * (xi(jj) .* u11(jj));
+            F_22_2(ii) = F_22_2(ii) + a_22(ii, jj) * (xi(jj) .* u22(jj));
+            F_23_2(ii) = F_23_2(ii) + a_23(ii, jj) * (xi(jj) .* u23(jj));
+            F_24_2(ii) = F_24_2(ii) + a_24(ii, jj) * (xi(jj) .* u24(jj));
+            F_25_2(ii) = F_25_2(ii) + a_25(ii, jj) * (xi(jj) .* u25(jj));
+            F_26_2(ii) = F_26_2(ii) + a_26(ii, jj) * (xi(jj) .* u26(jj));
+            
+            F_31_2(ii) = F_31_2(ii) + a_31(ii, jj) * (xi(jj) .* u31(jj));
+            F_32_2(ii) = F_32_2(ii) + a_32(ii, jj) * (xi(jj) .* u32(jj));
+            F_33_2(ii) = F_33_2(ii) + a_33(ii, jj) * (xi(jj) .* u33(jj));
+            F_34_2(ii) = F_34_2(ii) + a_34(ii, jj) * (xi(jj) .* u34(jj));
+            F_35_2(ii) = F_35_2(ii) + a_35(ii, jj) * (xi(jj) .* u35(jj));
+            F_36_2(ii) = F_36_2(ii) + a_36(ii, jj) * (xi(jj) .* u36(jj));
+        end
+        F_11_2(ii) = F_11_2(ii) - f_1_S_1(ii);
+        F_12_2(ii) = F_12_2(ii) - f_1_S_2(ii);
+        F_13_2(ii) = F_13_2(ii) - f_1_S_3(ii);
+        F_14_2(ii) = F_14_2(ii) - f_1_S_4(ii);
+        F_15_2(ii) = F_15_2(ii) - f_1_S_5(ii);
+        F_16_2(ii) = F_16_2(ii) - f_1_S_6(ii);
+        
+        F_21_2(ii) = F_21_2(ii) - f_2_S_1(ii);
+        F_22_2(ii) = F_22_2(ii) - f_2_S_2(ii);
+        F_23_2(ii) = F_23_2(ii) - f_2_S_3(ii);
+        F_24_2(ii) = F_24_2(ii) - f_2_S_4(ii);
+        F_25_2(ii) = F_25_2(ii) - f_2_S_5(ii);
+        F_26_2(ii) = F_26_2(ii) - f_2_S_6(ii);
+        
+        F_31_2(ii) = F_31_2(ii) - f_3_S_1(ii);
+        F_32_2(ii) = F_32_2(ii) - f_3_S_2(ii);
+        F_33_2(ii) = F_33_2(ii) - f_3_S_3(ii);
+        F_34_2(ii) = F_34_2(ii) - f_3_S_4(ii);
+        F_35_2(ii) = F_35_2(ii) - f_3_S_5(ii);
+        F_36_2(ii) = F_36_2(ii) - f_3_S_6(ii);
+    end
  
 
 end
