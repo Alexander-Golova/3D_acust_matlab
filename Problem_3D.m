@@ -1,5 +1,5 @@
 % ќсновные параметры задачи
-N = 5;
+N = 10;
 h = 1 / N;
 
 % параметры регул€ризованного метода
@@ -676,19 +676,19 @@ for iter = 1:numberOfIterations
     
     xi = xi - gamma * xi_Delta;
     
-    u11 = u11 - gamma * (J_10 * F_11_1 + J_101 * F_11_2);
-    u12 = u12 - gamma * (J_10 * F_12_1 + J_102 * F_12_2);
-    u13 = u13 - gamma * (J_10 * F_13_1 + J_103 * F_13_2);
-    u14 = u14 - gamma * (J_10 * F_14_1 + J_104 * F_14_2);
-    u15 = u15 - gamma * (J_10 * F_15_1 + J_105 * F_15_2);
-    u16 = u16 - gamma * (J_10 * F_16_1 + J_106 * F_16_2);
+    u11 = u11 - gamma * (J_10 * F11_1 + J_101 * F_11_2);
+    u12 = u12 - gamma * (J_10 * F12_1 + J_102 * F_12_2);
+    u13 = u13 - gamma * (J_10 * F13_1 + J_103 * F_13_2);
+    u14 = u14 - gamma * (J_10 * F14_1 + J_104 * F_14_2);
+    u15 = u15 - gamma * (J_10 * F15_1 + J_105 * F_15_2);
+    u16 = u16 - gamma * (J_10 * F16_1 + J_106 * F_16_2);
     
-    u21 = u21 - gamma * (J_20 * F_21_1 + J_201 * F_21_2);
-    u22 = u22 - gamma * (J_20 * F_22_1 + J_202 * F_22_2);
-    u23 = u23 - gamma * (J_20 * F_23_1 + J_203 * F_23_2);
-    u24 = u24 - gamma * (J_20 * F_24_1 + J_204 * F_24_2);
-    u25 = u25 - gamma * (J_20 * F_25_1 + J_205 * F_25_2);
-    u26 = u26 - gamma * (J_20 * F_26_1 + J_206 * F_26_2);
+    u21 = u21 - gamma * (J_20 * F21_1 + J_201 * F_21_2);
+    u22 = u22 - gamma * (J_20 * F22_1 + J_202 * F_22_2);
+    u23 = u23 - gamma * (J_20 * F23_1 + J_203 * F_23_2);
+    u24 = u24 - gamma * (J_20 * F24_1 + J_204 * F_24_2);
+    u25 = u25 - gamma * (J_20 * F25_1 + J_205 * F_25_2);
+    u26 = u26 - gamma * (J_20 * F26_1 + J_206 * F_26_2);
     
     u31 = u31 - gamma * (J_30 * F_31_1 + J_301 * F_31_2);
     u32 = u32 - gamma * (J_30 * F_32_1 + J_302 * F_32_2);
@@ -704,6 +704,34 @@ for iter = 1:numberOfIterations
             xi(ii) = 0.0;
         end        
     end
+    
+    ApproximateXi = zeros(N, N, N);
+    for k = 1:N
+        for l = 1:N
+            for m = 1:N
+                coord_1 = N^2 * (k -1) + N * (l - 1) + m;
+                ApproximateXi(k, l, m) = X(coord_1);                
+            end
+        end
+    end
+    
+    % создаем графическое окно
+    hF = figure;
+    % делаем нулевое графическое окно текущим
+    figure(hF);
+    
+    subplot(4, 2, 1), mesh(X_pl_2D, Y_pl_2D, ApproximateXi(:, :, 2))
+    subplot(4, 2, 2),mesh(X_pl_2D, Y_pl_2D, exactXi(:, :, 2));    
+    subplot(4, 2, 3), mesh(X_pl_2D, Y_pl_2D, ApproximateXi(:, :, 4))
+    subplot(4, 2, 4),mesh(X_pl_2D, Y_pl_2D, exactXi(:, :, 4));
+    subplot(4, 2, 5), mesh(X_pl_2D, Y_pl_2D, ApproximateXi(:, :, 6))
+    subplot(4, 2, 6),mesh(X_pl_2D, Y_pl_2D, exactXi(:, :, 6));    
+    subplot(4, 2, 7), mesh(X_pl_2D, Y_pl_2D, ApproximateXi(:, :, 8))
+    subplot(4, 2, 8),mesh(X_pl_2D, Y_pl_2D, exactXi(:, :, 8));
+    
+    
+    gamma = gamma * multiplier;
+
  
  
 
