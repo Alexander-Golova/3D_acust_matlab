@@ -696,6 +696,14 @@ for iter = 1:numberOfIterations
     u34 = u34 - gamma * (J_30 * F_34_1 + J_304 * F_34_2);
     u35 = u35 - gamma * (J_30 * F_35_1 + J_305 * F_35_2);
     u36 = u36 - gamma * (J_30 * F_36_1 + J_306 * F_36_2);
+    
+    % проекция xi    
+    for ii = 1:N^3
+        xi(ii) = real(xi(ii));
+        if xi(ii) < 0
+            xi(ii) = 0.0;
+        end        
+    end
  
  
 
