@@ -341,7 +341,7 @@ toc;
 % –ешаем обратную задачу
 % 
 % ---------------------------------------------------------------
-
+tic;
 % инициализаци€ xi
 for ii = 1:N^3
     xi(ii) = 0.0;
@@ -368,12 +368,75 @@ u34 = f_3_R_4;
 u35 = f_3_R_5;
 u36 = f_3_R_6;
 
+% ƒл€ якобиана
+J_10 = zeros(N^3);
+J_20 = zeros(N^3);
+J_30 = zeros(N^3);
+
+J_11= zeros(N^3);
+J_12= zeros(N^3);
+J_13= zeros(N^3);
+J_14= zeros(N^3);
+J_15= zeros(N^3);
+J_16= zeros(N^3);
+
+J_21= zeros(N^3);
+J_22= zeros(N^3);
+J_23= zeros(N^3);
+J_24= zeros(N^3);
+J_25= zeros(N^3);
+J_26= zeros(N^3);
+
+J_31= zeros(N^3);
+J_32= zeros(N^3);
+J_33= zeros(N^3);
+J_34= zeros(N^3);
+J_35= zeros(N^3);
+J_36= zeros(N^3);
 
 %------------------
 % »терационный метод
 
 for iter = 1:numberOfIterations
+    fprintf('iter = %i\n', iter);
+    % находим якобиан
+    for ii = 1:N^3
+        for jj = 1:N^3
+            J_10(ii, jj) = -a_10(ii, jj) * xi(jj);
+            J_20(ii, jj) = -a_20(ii, jj) * xi(jj);
+            J_30(ii, jj) = -a_30(ii, jj) * xi(jj);
+        end
+        J_10(ii, ii) = J_10(ii, ii) + 1;
+        J_20(ii, ii) = J_20(ii, ii) + 1;
+        J_30(ii, ii) = J_30(ii, ii) + 1;
+    end
+    for ii = 1:N^3
+        for jj = 1:N^3
+            J_11(ii, jj) = a_11(ii, jj) * u11(jj);
+            J_12(ii, jj) = a_12(ii, jj) * u12(jj);
+            J_13(ii, jj) = a_13(ii, jj) * u13(jj);
+            J_14(ii, jj) = a_14(ii, jj) * u14(jj);
+            J_15(ii, jj) = a_15(ii, jj) * u15(jj);
+            J_16(ii, jj) = a_16(ii, jj) * u16(jj);
+            
+            J_21(ii, jj) = a_21(ii, jj) * u21(jj);
+            J_22(ii, jj) = a_22(ii, jj) * u22(jj);
+            J_23(ii, jj) = a_23(ii, jj) * u23(jj);
+            J_24(ii, jj) = a_24(ii, jj) * u24(jj);
+            J_25(ii, jj) = a_25(ii, jj) * u25(jj);
+            J_26(ii, jj) = a_26(ii, jj) * u26(jj);
+            
+            J_31(ii, jj) = a_31(ii, jj) * u31(jj);
+            J_32(ii, jj) = a_32(ii, jj) * u32(jj);
+            J_33(ii, jj) = a_33(ii, jj) * u33(jj);
+            J_34(ii, jj) = a_34(ii, jj) * u34(jj);
+            J_35(ii, jj) = a_35(ii, jj) * u35(jj);
+            J_36(ii, jj) = a_36(ii, jj) * u36(jj);
+        end
+    end
+    
+ 
 
 end
-
+toc;
 
