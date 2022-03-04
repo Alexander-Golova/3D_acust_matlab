@@ -1,9 +1,9 @@
 % Основные параметры задачи
-N = 10;
+N = 2;
 h = 1 / N;
 
 % параметры регуляризованного метода
-numberOfIterations = 20;
+numberOfIterations = 1;
 gamma = 1.00;
 multiplier = 0.95;
 
@@ -13,9 +13,9 @@ omega = [pi 1.5 * pi 2.0 * pi];
 
 % Характеристики эксперимента
 % удаление детектора и источников от неоднородности
-rho_S = 1.0;
+rho_S = 0.1;
 % ширина зоны детекторов
-width_D = 1.0;
+width_D = 0.5;
 % шаг по радиусу
 h_D = width_D / N;
 % шаг по углу
@@ -586,26 +586,26 @@ for iter = 1:numberOfIterations
     F35_1 = F35_1 - f_3_R_5;
     F36_1 = F36_1 - f_3_R_6;
     
-    F11_2 = zeros(N^3);
-    F12_2 = zeros(N^3);
-    F13_2 = zeros(N^3);
-    F14_2 = zeros(N^3);
-    F15_2 = zeros(N^3);
-    F16_2 = zeros(N^3);
+    F11_2 = zeros(N^3, 1);
+    F12_2 = zeros(N^3, 1);
+    F13_2 = zeros(N^3, 1);
+    F14_2 = zeros(N^3, 1);
+    F15_2 = zeros(N^3, 1);
+    F16_2 = zeros(N^3, 1);
     
-    F21_2 = zeros(N^3);
-    F22_2 = zeros(N^3);
-    F23_2 = zeros(N^3);
-    F24_2 = zeros(N^3);
-    F25_2 = zeros(N^3);
-    F26_2 = zeros(N^3);
+    F21_2 = zeros(N^3, 1);
+    F22_2 = zeros(N^3, 1);
+    F23_2 = zeros(N^3, 1);
+    F24_2 = zeros(N^3, 1);
+    F25_2 = zeros(N^3, 1);
+    F26_2 = zeros(N^3, 1);
     
-    F31_2 = zeros(N^3);
-    F32_2 = zeros(N^3);
-    F33_2 = zeros(N^3);
-    F34_2 = zeros(N^3);
-    F35_2 = zeros(N^3);
-    F36_2 = zeros(N^3);
+    F31_2 = zeros(N^3, 1);
+    F32_2 = zeros(N^3, 1);
+    F33_2 = zeros(N^3, 1);
+    F34_2 = zeros(N^3, 1);
+    F35_2 = zeros(N^3, 1);
+    F36_2 = zeros(N^3, 1);
     
     for ii = 1:N^3
         for jj = 1:N^3
