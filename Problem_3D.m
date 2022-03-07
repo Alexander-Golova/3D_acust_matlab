@@ -1,9 +1,9 @@
 % ќсновные параметры задачи
-N = 2;
+N = 10;
 h = 1 / N;
 
 % параметры регул€ризованного метода
-numberOfIterations = 1;
+numberOfIterations = 4;
 gamma = 1.00;
 multiplier = 0.95;
 
@@ -13,7 +13,7 @@ omega = [pi 1.5 * pi 2.0 * pi];
 
 % ’арактеристики эксперимента
 % удаление детектора и источников от неоднородности
-rho_S = 0.1;
+rho_S = 0.01;
 % ширина зоны детекторов
 width_D = 0.5;
 % шаг по радиусу
@@ -111,7 +111,7 @@ xi = zeros(N^3, 1);
 for k = 1:N
     for l = 1:N
         for m = 1:N
-            temp = 0.3 * exp(-((k * h - 0.7)^2 + (l * h - 0.7)^2 + (m * h - 0.5)^2) * 64);
+            temp = 1.0 * exp(-((k * h - 0.7)^2 + (l * h - 0.7)^2 + (m * h - 0.5)^2) * 64);
             exactXi(k, l, m) = temp;
             xi(N^2 * (k - 1) + N * (l - 1) + m) = temp;
         end
@@ -705,6 +705,38 @@ for iter = 1:numberOfIterations
         end        
     end
     
+    % —глаживание
+    fprintf('sgl\n');
+    for ii = 1:N^2
+        xi(ii) = 0.1 * xi(ii);
+        xi(N^2 + ii) = 0.5 * xi(N^2 + ii);
+        xi(2 * N^2 + ii) = 0.8 * xi(2 * N^2 + ii);
+        
+        xi(N^2 * (N - 1) + ii) = 0.1 * xi(N^2 * (N - 1) + ii);
+        xi(N^2 * (N - 2) + ii) = 0.5 * xi(N^2 * (N - 2) + ii);
+        xi(N^2 * (N - 3) + ii) = 0.8 * xi(N^2 * (N - 3) + ii);
+    end
+    for i = 1:N
+        for j = 1:N
+           xi((i - 1) * N^2 + j) = 0.1 * xi((i - 1) * N^2 + j);
+           xi((i - 1) * N^2 + N + j) = 0.5 * xi((i - 1) * N^2 + N + j);
+           xi((i - 1) * N^2 + 2 * N + j) = 0.8 * xi((i - 1) * N^2 + 2 * N + j);
+           
+           xi(i * N^2 - N + j) = 0.1 * xi(i * N^2 - N + j);
+           xi(i * N^2 - 2 * N + j) = 0.5 * xi(i * N^2 - 2 * N + j);
+           xi(i * N^2 - 3 * N + j) = 0.8 * xi(i * N^2 - 3 * N + j);
+           
+           xi((i - 1) * N^2 + (j - 1) * N + 1) = 0.1 * xi((i - 1) * N^2 + (j - 1) * N + 1);
+           xi((i - 1) * N^2 + (j - 1) * N + 2) = 0.5 * xi((i - 1) * N^2 + (j - 1) * N + 2);
+           xi((i - 1) * N^2 + (j - 1) * N + 3) = 0.8 * xi((i - 1) * N^2 + (j - 1) * N + 3);
+           
+           xi((i - 1) * N^2 + j * N) = 0.1 * xi((i - 1) * N^2 + j * N);
+           xi((i - 1) * N^2 + j * N - 1) = 0.5 * xi((i - 1) * N^2 + j * N - 1);
+           xi((i - 1) * N^2 + j * N - 2) = 0.8 * xi((i - 1) * N^2 + j * N - 2);
+        end
+    end
+
+    fprintf('apr\n');
     ApproximateXi = zeros(N, N, N);
     for k = 1:N
         for l = 1:N
